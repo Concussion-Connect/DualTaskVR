@@ -1,3 +1,4 @@
+#Dual Task VR
 DualTask VR is the Node webapp for the Athlete side of the Dual Task Virtual Reality test
 
 After each video has run its course, it will automatically move on to the next phase of the test. In the future, this webapp should be paired with the Athletic Trainer's Android application so the flow of the test can be controlled from the Atletic Trainer's device.
@@ -9,5 +10,5 @@ To Run:
 1) Download and Install the latest version of Node.js
 2) Navigate to the DualTaskVR project folder in the Terminal
 3) Type "node app.js" in the Terminal
-4) Message should read ~Example app listening on port 3000!~
-5) Open any web browser and navigate to ~http://localhost:3000/~
+4) Message should read ```javascript Example app listening on port 3000!```
+5) Open any web browser and navigate to <http://localhost:3000/>
