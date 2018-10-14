@@ -1,0 +1,4 @@
+DualTask VR is the Node webapp for the Atlete side of the Dual Task Virtual Reality test
+
+After each video has run its course, it will automatically move on to the next phase of the test. In the future, this webapp should be paired with the Athletic Trainer's Android application so the flow of the test can be controlled from the Atletic Trainer's device.
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #myVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%; 
+      min-height: 100%;
+    }
+  </style>
+   <script>
+    function goforward(arg) {
+      location.replace('/trialBStance');
+    }
+
+    setTimeout(goforward, 24000);
+  </script>
+</head>
+  <body>
+    <video id="myVideo" autoplay>
+      <source src="http://localhost:3000/c" type="video/mp4">
+    </video>
+  </body>
+</html>
