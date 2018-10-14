@@ -10,5 +10,5 @@ To Run:
 1) Download and Install the latest version of Node.js
 2) Navigate to the DualTaskVR project folder in the Terminal
 3) Type "node app.js" in the Terminal
-4) Message should read ```javascript Example app listening on port 3000!```
-5) Open any web browser and navigate to <http://localhost:3000/>
+4) Message should read "Example app listening on port 3000!"
+5) Open any web browser and navigate to http://localhost:3000/
