@@ -1,0 +1,25 @@
+{
+  "name": "dualtaskvr",
+  "version": "1.0.0",
+  "description": "DualTask VR is the Node webapp for the Athlete side of the Dual Task Virtual Reality test",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Concussion-Connect/DualTaskVR.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Concussion-Connect/DualTaskVR/issues"
+  },
+  "homepage": "https://github.com/Concussion-Connect/DualTaskVR#readme"
+}
