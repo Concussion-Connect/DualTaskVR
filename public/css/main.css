@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    background-color: aqua; 
+}
+
+.container {
+    width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#game-pin {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+form {
+    display: block;
+}

@@ -2,13 +2,27 @@ var net = require('net');
 
 const express = require('express');
 const app = express();
-app.set('view engine', 'ejs');
+
+// Static Files
+app.use(express.static('public'))
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/img', express.static(__dirname + 'public/img'))
+
+// Set Views
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 //--------------page paths--------------\\
 
-//opening
+// Game Pin
 app.get('/', function(req, res) {  
-  res.render('opening', { title: 'The index page!' })
+  res.render('index', { text: 'The index page!' })
+});
+
+//opening
+app.get('/opening', function(req, res) {  
+  res.render('opening', { text: 'The opening page!' })
 });
 
 //trial A
