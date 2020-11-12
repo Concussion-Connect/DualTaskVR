@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual Task</title>
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual Task</title>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Dual Task Trainer</h1>
-        <input type="text" id="game-pin" placeholder="Game Pin">
-        <div>
-            <button id="submit-btn">Join</button>
-        </div>
+  <div class="container">
+    <h1>Dual Task Trainer</h1>
+    <input type="text" id="game-pin" name="gamePin" placeholder="Game Pin">
+    <div>
+      <button type="submit" id="submit-btn">Join</button>
     </div>
-    <script type="text/javascript" src="js/script.js"></script>
+  </div>
+  <script type="module" src="/js/index.js"></script>
+  <script type="module" src="/js/session.js"></script>
+  <script type="module" src="/js/connectToDB.js"></script>
 </body>
 </html>

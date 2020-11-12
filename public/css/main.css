@@ -14,12 +14,20 @@ body {
     text-align: center;
 }
 
+form {
+    display: block;
+}
+
 #game-pin {
     font-size: 30px;
     text-align: center;
     font-weight: bold;
 }
 
-form {
-    display: block;
+#video-player {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
 }
