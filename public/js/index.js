@@ -8,7 +8,3 @@ submitBtn.addEventListener("click", validateId);
 function validateId() {
   getTrainerSession(gamePin.value);
 }
-
-function startSession() {
-  location.replace("/session/opening");
-}

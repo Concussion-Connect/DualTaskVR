@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 });
 
 // Session Page
-app.get('/session/:video', function(req, res) {  
+app.get('/session/:id/:wordList/:currentTrial/:video', function(req, res) {  
   console.log(req.params.video);
   res.render('session', { video: req.params.video })
 });

@@ -1,7 +1,7 @@
-// Document Element
-
 // Global Variables
-let states = [
+const pathArray = window.location.pathname.split('/');
+const activeCurrentTrial = pathArray[4];
+const states = [
     "/", "/opening",
     "/trialAStance", "/trialA", 
     "/trialBStance", "/trialB",
@@ -9,21 +9,14 @@ let states = [
     "/trialDStance", "/trialD",
 ]
 
-// function updateSessionState(currentTrial) {
-//     if (location.pathname == "/") {
-//         location.replace("/session/opening");
-//     } else {
-//         let stateIndex = 0;
-//         while ("/session" + states[stateIndex] != location.pathname) {
-//             stateIndex++;
-//         }
-//         stateIndex++;
-//         location.replace("/session" + states[stateIndex]);
-//     }
-// }
+export function updateSessionState(id, wordList, currentTrial) {
+    location.replace("/session" 
+    + "/" + id 
+    + "/" + wordList 
+    + "/" + currentTrial
+    + states[currentTrial]);
+}
 
-
-export function updateSessionState(currentTrial) {
-    location.replace("/session" + states[currentTrial]);
-    console.log("fish");
+export function sessionHasBeenUpdated(currentTrial) {
+    return currentTrial != activeCurrentTrial;
 }
