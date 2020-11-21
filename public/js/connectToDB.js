@@ -1,5 +1,6 @@
-import {updateSessionState} from './session.js';
 import {sessionHasBeenUpdated} from './session.js';
+import {updateSessionState} from './session.js';
+import {showAlert} from './index.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAUwiJ_mwu2z7VbXMjwOmqU21CaXlUDfo8",
@@ -36,6 +37,10 @@ function createTrainerSession() {
 }
 
 export function getTrainerSession(id) {
+    if (!id) {
+        showAlert("empty");
+        return;
+    }
     const session = sessionRef.doc(id);
     session.get().then(function(doc) {
         if (doc.exists) {
@@ -44,6 +49,7 @@ export function getTrainerSession(id) {
             updateSessionState(id, data.wordList, data.currentTrial);
         } else {
             // doc.data() will be undefined in this case
+            showAlert("does not exist");
             console.log("No such document!");
         }
     }).catch(function(error) {

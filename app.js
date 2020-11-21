@@ -16,7 +16,7 @@ app.set('view engine', 'ejs')
 
 //--------------page paths--------------\\
 
-// Game Pin Screen
+// Session Pin Screen
 app.get('/', function(req, res) {  
   res.render('index', { text: 'The index page!' })
 });
