@@ -6,14 +6,13 @@ const alert = document.getElementById("alert");
 
 // Database Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAUwiJ_mwu2z7VbXMjwOmqU21CaXlUDfo8",
-  authDomain: "testing-c4ea7.firebaseapp.com",
-  databaseURL: "https://testing-c4ea7.firebaseio.com",
-  projectId: "testing-c4ea7",
-  storageBucket: "testing-c4ea7.appspot.com",
-  messagingSenderId: "530686084404",
-  appId: "1:530686084404:web:bcf92f7f8e28a20651d161",
-  measurementId: "G-3PN4TE0YNW"
+  apiKey: "AIzaSyA78Xpn_pNhsu0lkQRs2w4Z6Kw_vjCg_jc",
+  authDomain: "concussion-connect.firebaseapp.com",
+  databaseURL: "https://concussion-connect.firebaseio.com",
+  projectId: "concussion-connect",
+  storageBucket: "concussion-connect.appspot.com",
+  messagingSenderId: "334885809125",
+  appId: "1:334885809125:web:edc7f0b42b7ecc868f9d0c"
 };
 
 // Initialize Firebase

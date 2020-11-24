@@ -2,15 +2,12 @@
 const pathArray = window.location.pathname.split('/');
 const activeCurrentTrial = pathArray[4];
 const states = [
-  "/", "/opening",
-  "/trialAStance", "/trialA", 
-  "/trialBStance", "/trialB",
-  "/trialCStance", "/trialC",
-  "/trialDStance", "/trialD",
-]
+                // "/trial1",
+                "/trial1AndOpening",
+                "/trial2", "/trial3", "/trial4",]
 
 export function updateSessionState(id, wordList, currentTrial) {
-  if (currentTrial == 0) {
+  if (id == null) {
     location.replace("/");
   } else {
     location.replace("/session" 
