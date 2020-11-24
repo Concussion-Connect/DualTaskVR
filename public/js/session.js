@@ -1,10 +1,7 @@
 // Global Variables
 const pathArray = window.location.pathname.split('/');
 const activeCurrentTrial = pathArray[4];
-const states = [
-                // "/trial1",
-                "/trial1AndOpening",
-                "/trial2", "/trial3", "/trial4",]
+const states = ["/opening", "/trial1","/trial2", "/trial3", "/trial4",]
 
 export function updateSessionState(id, wordList, currentTrial) {
   if (id == null) {
