@@ -60,4 +60,8 @@ app.get('/retrieve/:video', function(req, res) {
 });
 
 //port connection
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+//prioritize PORT environment variable
+app.listen(
+  process.env.PORT || 3000,
+  () => console.log('Example app listening on port 3000!')
+);
