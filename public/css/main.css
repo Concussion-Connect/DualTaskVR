@@ -75,17 +75,21 @@ body {
 
 
 /* Media Specific CSS */
-@media only screen and (orientation:portrait){
+/* @media only screen and (orientation:portrait){
   #wrapper { display:none; }
   #warning-message { display:block; }
-}
+} */
 
 @media only screen and (orientation:landscape){
   #warning-message { display:none; }
 }
 
 @media only screen and (max-width: 850px) {
+  .container {
+    width: 75%;
+  }
   #session-pin {
     font-size: 20px;
+    width: 75%;
   }
 }

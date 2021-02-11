@@ -4,7 +4,8 @@
   <title>Dual Task</title>
   <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <!-- <link rel="stylesheet" href="css/session.css"> -->
   <style>
     body {
       background-color: black;
@@ -13,7 +14,7 @@
 </head>
   <body>
     <video id="video-player" autoplay>
-      <source src="http://localhost:3000/retrieve/<%= video %>" type="video/mp4">
+      <source src="/retrieve/<%= video %>" type="video/mp4">
     </video>
     <script type="module" src="/js/connectToDB.js"></script>
     <script type="module" src="/js/session.js"></script>
