@@ -29,6 +29,7 @@ export default class Player extends Component {
     if (currentTrialUpdated) {
       this.setState({currentTrial: docData.currentTrial})
       this.sessionChanger.current.click();
+      window.location.reload();
     }
   }
 
