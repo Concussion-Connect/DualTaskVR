@@ -2,16 +2,23 @@
   "name": "dualtaskvr",
   "version": "1.0.0",
   "description": "DualTask VR is the Node webapp for the Athlete side of the Dual Task Virtual Reality test",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
-    "ejs": "^3.1.5",
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase": "^8.0.1",
-    "firebase-admin": "^9.3.0"
+    "firebase-admin": "^9.3.0",
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js",
+    "heroku-postbuild": "cd client && npm i && npm run build",
+    "build": "cd client && npm run build",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && npm run start",
+    "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
