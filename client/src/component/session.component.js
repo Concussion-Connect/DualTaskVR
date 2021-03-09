@@ -44,7 +44,7 @@ export default class Player extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <video onEnded={() => this.onVideoEnd()} controls muted autoPlay>
+          <video id="video-player" onEnded={() => this.onVideoEnd()} controls muted autoPlay>
             <source src={`/video/${this.state.currentTrial}`} type="video/mp4"></source>
           </video>
           <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>

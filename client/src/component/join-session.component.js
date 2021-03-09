@@ -57,6 +57,7 @@ export default class JoinSession extends Component {
           <div>
               <button
                 type="submit"
+                class="action-btn"
                 onClick={this.validateSession}
               >Join Session</button>
           </div>

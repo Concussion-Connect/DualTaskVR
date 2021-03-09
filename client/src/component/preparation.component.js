@@ -32,9 +32,17 @@ export default class Preparation extends Component {
     return (
       <div className="App App-header">
         <div className="container">
-          <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>
-            <div>Fish</div>
-          </Link>
+          <div>
+            <h2>Session Preparation</h2>
+            <ul className="no-bullets">
+              <li>Make sure your device is in landscape mode.</li>
+              <li>Place your device into the VR headset.</li>
+              <li>Press "Join" when you're ready!</li>
+            </ul>
+            <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>
+              <button className="action-btn">Join</button>
+            </Link>
+          </div>
         </div>
       </div>
     )
