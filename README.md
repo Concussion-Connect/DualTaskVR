@@ -9,5 +9,5 @@ To Run:
 1. In a command line (typically Terminal on MacOS, cmd or Powershell on Windows), navigate to this project directory
 1. Install dependencies with `npm i`
 1. Run the app with `node server.js`
-1. Message should read "Example app listening on port 3000!"
-1. Open any web browser and navigate to http://localhost:3000/ to start the app
+1. Message should read "Example app listening on port 5000!"
+1. Open any web browser and navigate to http://localhost:5000/ to start the app
