@@ -18,10 +18,6 @@ app.use(cors());
 
 app.use(express.static('client/build'));
 
-app.get('/video', (req, res) => {
-  res.sendFile('assets/opening.mp4', { root: __dirname });
-});
-
 //--------------video paths--------------\\
 
 // Video Retrieval
@@ -56,9 +52,9 @@ app.get('/video/:id', (req, res) => {
   }
 });
 
-app.get('/image/:name', (req, res) => {
-  res.sendFile(`assets/${req.params.name}`, { root: __dirname });
-})
+const sessionRouter = require('./routes/session');
+
+app.use('/session', sessionRouter);
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
