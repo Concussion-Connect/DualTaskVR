@@ -2,67 +2,90 @@ const rootName = "trial";
 const vrRootName = "trial_vr";
 
 const session_info = {
-    "clinical": [
+    "dual": [
         {
             id: 0,
-            videoName: "trial0",
+            videoName: "",
             showWordList: false
         },
         {
             id: 1,
-            videoName: "trial1",
+            videoName: "",
             showWordList: true
 
         },
         {
             id: 2,
-            videoName: "trial2",
+            videoName: "",
             showWordList: false
         },
         {
             id: 3,
-            videoName: "trial3",
+            videoName: "",
             showWordList: false
         },
         {
             id: 4,
-            videoName: "trial4",
+            videoName: "",
             showWordList: false
         }
     ],
-    "research": [
+    "bess": [
         {
             id: 0,
-            videoName: "trial0",
-            showWordList: true
+            videoName: "",
+            showWordList: false
         },
         {
             id: 1,
-            videoName: "trial1",
+            videoName: "",
             showWordList: false
 
         },
         {
             id: 2,
-            videoName: "trial2",
+            videoName: "",
             showWordList: false
         },
         {
             id: 3,
-            videoName: "trial3",
+            videoName: "",
+            showWordList: false
+        },
+    ],
+    "scat": [
+        {
+            id: 0,
+            videoName: "",
+            showWordList: false
+        },
+        {
+            id: 1,
+            videoName: "",
+            showWordList: false
+
+        },
+        {
+            id: 2,
+            videoName: "",
+            showWordList: false
+        },
+        {
+            id: 3,
+            videoName: "",
             showWordList: false
         },
         {
             id: 4,
-            videoName: "trial4",
+            videoName: "",
             showWordList: false
         }
     ]
 };
 
-function getSessionInfo(sessionType = "clinical", showVR = false) {
-    let chosenTypeInfo = session_info[sessionType];
-    let videoRoot = showVR ? rootName : vrRootName;
+function getSessionInfo(testType = "dual", showVR = false) {
+    let chosenTypeInfo = session_info[testType];
+    let videoRoot = showVR ? vrRootName : rootName;
     for (let i = 0; i < chosenTypeInfo.length; i++) {
         chosenTypeInfo[i].videoName = videoRoot + i;
     }

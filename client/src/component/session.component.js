@@ -21,13 +21,14 @@ export default class Player extends Component {
     super(props);
     this.state = {
       sessionPin: this.props.match.params.sessionPin,
-      currentTrial: this.props.match.params.currentTrial,
+      currentTrial: parseInt(this.props.match.params.currentTrial),
       wordList: this.props.match.params.wordList,
-      displayWorldList: false,
-      sessionInfo: [],
+      testType: this.props.match.params.testType,
+      showVR: this.props.match.params.showVR == "true",
       content: ""
     };
-    this.videoName = getSessionInfo("clinical")[this.state.currentTrial].videoName;
+    this.sessionInfo = getSessionInfo(this.state.testType, this.state.showVR);
+    this.videoName = this.sessionInfo[this.state.currentTrial].videoName;
     this.sessionChanger = React.createRef();
     this.sessionHasUpdated = this.sessionHasUpdated.bind(this);
   }
@@ -38,17 +39,6 @@ export default class Player extends Component {
         console.log("Current data: ", doc.data());
         this.sessionHasUpdated(doc.data());
     });
-
-
-
-    try {
-      const res = await fetch('/session/info/clinical/true');
-      const info = await res.json();
-      this.setState({ sessionInfo: info });
-      console.log(this.state.sessionInfo);
-    } catch (error) {
-        console.log(error);
-    }
   }
 
   sessionHasUpdated(docData) {
@@ -61,8 +51,8 @@ export default class Player extends Component {
   }
 
   onVideoEnd() {
-    let isFinalVideo = this.state.currentTrial == this.state.sessionInfo.length  - 1;
-    let showWordList = this.state.sessionInfo[this.state.currentTrial].showWordList;
+    let isFinalVideo = this.state.currentTrial == this.sessionInfo.length - 1;
+    let showWordList = this.sessionInfo[this.state.currentTrial].showWordList;
     if (isFinalVideo) {
       window.location.replace('/');
     } else if (showWordList) {
@@ -85,6 +75,9 @@ export default class Player extends Component {
       console.log(wordIndex);
       if (wordIndex == wordList.length) {
         clearInterval(displayInterval);
+        this.setState({
+          displayWordList: false
+        });    
       }
     }, 1000);
   }
@@ -93,13 +86,12 @@ export default class Player extends Component {
     return (
       <div className="App">
         <video className={this.state.displayWordList ? "hidden" : "video-player"} onEnded={() => this.onVideoEnd()} controls muted autoPlay>
-          <source src={`/video/${this.videoName}`} type="video/mp4"></source>
+          <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
-        <p>{this.videoName}</p>
         <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
           <div>{this.state.content}</div>
         </div>
-        <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>
+        <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}/${this.state.testType}/${this.state.showVR}`}>
           <div className="hidden" ref={this.sessionChanger}>Fish Taco</div>
         </Link>
       </div>
