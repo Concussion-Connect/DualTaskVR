@@ -21,8 +21,8 @@ app.use(express.static('client/build'));
 //--------------video paths--------------\\
 
 // Video Retrieval
-app.get('/video/:id', (req, res) => {
-  const path = `assets/trial${req.params.id}.mp4`;
+app.get('/video/:videoName', (req, res) => {
+  const path = `assets/${req.params.videoName}.mp4`;
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
