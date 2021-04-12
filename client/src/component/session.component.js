@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from "./firestore";
-import Content from "./word-list-display.component";
+import getSessionInfo from "./sessionInfo";
+
+const wordList2DArray = [
+  ["Elbow", "Apple", "Carpet", "Saddle", "Bubble"],
+  ["Candle", "Paper", "Sugar", "Sandwich", "Wagon"],
+  ["Baby", "Monkey", "Perfume", "Sunset", "Iron"],
+  ["Finger", "Penny", "Blanket", "Lemon", "Insect"]
+];
 
 const wordList = ["baby", "monkey", "perfume", "sunset", "iron"]
 
 const db = firebase.firestore();
+
+const wordListChosen = 0;
 
 export default class Player extends Component {
   constructor(props) {
@@ -16,8 +25,9 @@ export default class Player extends Component {
       wordList: this.props.match.params.wordList,
       displayWorldList: false,
       sessionInfo: [],
-      content: "fish"
+      content: ""
     };
+    this.videoName = getSessionInfo("clinical")[this.state.currentTrial].videoName;
     this.sessionChanger = React.createRef();
     this.sessionHasUpdated = this.sessionHasUpdated.bind(this);
   }
@@ -28,6 +38,8 @@ export default class Player extends Component {
         console.log("Current data: ", doc.data());
         this.sessionHasUpdated(doc.data());
     });
+
+
 
     try {
       const res = await fetch('/session/info/clinical/true');
@@ -62,11 +74,12 @@ export default class Player extends Component {
   displayWordList() {
     this.setState({
       displayWordList: true
-    });
+    });    
+
     let wordIndex = 0;
     let displayInterval = setInterval(() => {
       this.setState({
-        content: wordList[wordIndex]
+        content: wordList2DArray[wordListChosen][wordIndex]
       });
       wordIndex++;
       console.log(wordIndex);
@@ -80,8 +93,9 @@ export default class Player extends Component {
     return (
       <div className="App">
         <video className={this.state.displayWordList ? "hidden" : "video-player"} onEnded={() => this.onVideoEnd()} controls muted autoPlay>
-          <source src={`/video/${this.state.currentTrial}`} type="video/mp4"></source>
+          <source src={`/video/${this.videoName}`} type="video/mp4"></source>
         </video>
+        <p>{this.videoName}</p>
         <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
           <div>{this.state.content}</div>
         </div>
