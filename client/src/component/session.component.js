@@ -25,6 +25,9 @@ export default class Player extends Component {
       wordList: this.props.match.params.wordList,
       testType: this.props.match.params.testType,
       showVR: this.props.match.params.showVR == "true",
+      displayVideo: true,
+      displayWordList: false,
+      displayTrialEnd: false,
       content: ""
     };
     this.sessionInfo = getSessionInfo(this.state.testType, this.state.showVR);
@@ -62,35 +65,43 @@ export default class Player extends Component {
   }
 
   displayWordList() {
-    this.setState({
-      displayWordList: true
-    });    
-
     let wordIndex = 0;
+    this.setState({
+      displayVideo: false,
+      displayWordList: true
+    });
+    this.setState({
+      content: wordList2DArray[wordListChosen][wordIndex]
+    });  
     let displayInterval = setInterval(() => {
+      wordIndex++;
       this.setState({
         content: wordList2DArray[wordListChosen][wordIndex]
       });
-      wordIndex++;
-      console.log(wordIndex);
       if (wordIndex == wordList.length) {
         clearInterval(displayInterval);
         this.setState({
-          displayWordList: false
+          displayWordList: false,
+          displayTrialEnd: true,
         });    
       }
-    }, 1000);
+    }, 3500);
   }
 
   render() {
     return (
-      <div className="App">
-        <video className={this.state.displayWordList ? "hidden" : "video-player"} onEnded={() => this.onVideoEnd()} controls muted autoPlay>
+      <div className="App full-cover">
+        <video className={this.state.displayVideo ? "full-cover" : "hidden"} onEnded={() => this.onVideoEnd()} controls autoPlay webkit-playsinline playsinline>
           <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
         <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
           <div>{this.state.content}</div>
         </div>
+        <img 
+          className={this.state.displayTrialEnd ? "full-cover" : "hidden"}
+          src={`/image/end_of_trial`}
+          alt="Stop! The Trial is Over!"
+        />
         <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}/${this.state.testType}/${this.state.showVR}`}>
           <div className="hidden" ref={this.sessionChanger}>Fish Taco</div>
         </Link>
