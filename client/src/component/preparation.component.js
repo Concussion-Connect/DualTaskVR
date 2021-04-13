@@ -8,7 +8,8 @@ export default class Preparation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionPin: this.props.match.params.sessionPin
+      sessionPin: this.props.match.params.sessionPin,
+      showVR: false
     };
   }
 
@@ -20,7 +21,8 @@ export default class Preparation extends Component {
         console.log("Document data: ", doc.data());
         this.setState({
           currentTrial: doc.data().currentTrial,
-          wordList: doc.data().wordList
+          wordList: doc.data().wordList,
+          testType: doc.data().testType
         })
       } else {
         console.log("No such document!");
@@ -39,7 +41,7 @@ export default class Preparation extends Component {
               <li>Place your device into the VR headset.</li>
               <li>Press "Join" when you're ready!</li>
             </ul>
-            <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>
+            <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}/${this.state.testType}/${this.state.showVR}`}>
               <button className="action-btn">Join</button>
             </Link>
           </div>

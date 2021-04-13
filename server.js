@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
+const stream = require('stream')
 const path = require('path');
 const app = express();
 
@@ -21,9 +22,9 @@ app.use(express.static('client/build'));
 //--------------video paths--------------\\
 
 // Video Retrieval
-app.get('/video/:id', (req, res) => {
-  const path = `assets/trial${req.params.id}.mp4`;
-  const stat = fs.statSync(path);
+app.get('/video/:videoDirectory/:videoName', (req, res) => {
+  const path_to = `assets/${req.params.videoDirectory}/${req.params.videoName}.mp4`;
+  const stat = fs.statSync(path_to);
   const fileSize = stat.size;
   const range = req.headers.range;
   if (range) {
@@ -33,7 +34,7 @@ app.get('/video/:id', (req, res) => {
           ? parseInt(parts[1], 10)
           : fileSize-1;
       const chunksize = (end-start) + 1;
-      const file = fs.createReadStream(path, {start, end});
+      const file = fs.createReadStream(path_to, {start, end});
       const head = {
           'Content-Range': `bytes ${start}-${end}/${fileSize}`,
           'Accept-Ranges': 'bytes',
@@ -48,9 +49,26 @@ app.get('/video/:id', (req, res) => {
           'Content-Type': 'video/mp4',
       };
       res.writeHead(200, head);
-      fs.createReadStream(path).pipe(res);
+      fs.createReadStream(path_to).pipe(res);
   }
 });
+
+// Image Retrieval
+app.get('/image/:imageName', (req, res) => {
+  const path_to = `assets/images/${req.params.imageName}.png`;
+  const r = fs.createReadStream(path_to) // or any other way to get a readable stream
+  const ps = new stream.PassThrough() // <---- this makes a trick with stream error handling
+  stream.pipeline(
+   r,
+   ps, // <---- this makes a trick with stream error handling
+   (err) => {
+    if (err) {
+      console.log(err) // No such file or any other kind of error
+      return res.sendStatus(400); 
+    }
+  })
+  ps.pipe(res) // <---- this makes a trick with stream error handling
+})
 
 const sessionRouter = require('./routes/session');
 

@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from "./firestore";
-import Content from "./word-list-display.component";
+import getSessionInfo from "./sessionInfo";
+
+const wordList2DArray = [
+  ["Elbow", "Apple", "Carpet", "Saddle", "Bubble"],
+  ["Candle", "Paper", "Sugar", "Sandwich", "Wagon"],
+  ["Baby", "Monkey", "Perfume", "Sunset", "Iron"],
+  ["Finger", "Penny", "Blanket", "Lemon", "Insect"]
+];
 
 const wordList = ["baby", "monkey", "perfume", "sunset", "iron"]
 
 const db = firebase.firestore();
+
+const wordListChosen = 0;
 
 export default class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
       sessionPin: this.props.match.params.sessionPin,
-      currentTrial: this.props.match.params.currentTrial,
+      currentTrial: parseInt(this.props.match.params.currentTrial),
       wordList: this.props.match.params.wordList,
-      displayWorldList: false,
-      sessionInfo: [],
-      content: "fish"
+      testType: this.props.match.params.testType,
+      showVR: this.props.match.params.showVR == "true",
+      displayVideo: true,
+      displayWordList: false,
+      displayTrialEnd: false,
+      content: ""
     };
+    this.sessionInfo = getSessionInfo(this.state.testType, this.state.showVR);
+    this.videoName = this.sessionInfo[this.state.currentTrial].videoName;
     this.sessionChanger = React.createRef();
     this.sessionHasUpdated = this.sessionHasUpdated.bind(this);
   }
@@ -28,15 +42,6 @@ export default class Player extends Component {
         console.log("Current data: ", doc.data());
         this.sessionHasUpdated(doc.data());
     });
-
-    try {
-      const res = await fetch('/session/info/clinical/true');
-      const info = await res.json();
-      this.setState({ sessionInfo: info });
-      console.log(this.state.sessionInfo);
-    } catch (error) {
-        console.log(error);
-    }
   }
 
   sessionHasUpdated(docData) {
@@ -49,8 +54,8 @@ export default class Player extends Component {
   }
 
   onVideoEnd() {
-    let isFinalVideo = this.state.currentTrial == this.state.sessionInfo.length  - 1;
-    let showWordList = this.state.sessionInfo[this.state.currentTrial].showWordList;
+    let isFinalVideo = this.state.currentTrial == this.sessionInfo.length - 1;
+    let showWordList = this.sessionInfo[this.state.currentTrial].showWordList;
     if (isFinalVideo) {
       window.location.replace('/');
     } else if (showWordList) {
@@ -60,32 +65,44 @@ export default class Player extends Component {
   }
 
   displayWordList() {
+    let wordIndex = 0;
     this.setState({
+      displayVideo: false,
       displayWordList: true
     });
-    let wordIndex = 0;
+    this.setState({
+      content: wordList2DArray[wordListChosen][wordIndex]
+    });  
     let displayInterval = setInterval(() => {
-      this.setState({
-        content: wordList[wordIndex]
-      });
       wordIndex++;
-      console.log(wordIndex);
+      this.setState({
+        content: wordList2DArray[wordListChosen][wordIndex]
+      });
       if (wordIndex == wordList.length) {
         clearInterval(displayInterval);
+        this.setState({
+          displayWordList: false,
+          displayTrialEnd: true,
+        });    
       }
-    }, 1000);
+    }, 3500);
   }
 
   render() {
     return (
-      <div className="App">
-        <video className={this.state.displayWordList ? "hidden" : "video-player"} onEnded={() => this.onVideoEnd()} controls muted autoPlay>
-          <source src={`/video/${this.state.currentTrial}`} type="video/mp4"></source>
+      <div className="App full-cover">
+        <video className={this.state.displayVideo ? "full-cover" : "hidden"} onEnded={() => this.onVideoEnd()} controls autoPlay webkit-playsinline playsinline>
+          <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
         <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
           <div>{this.state.content}</div>
         </div>
-        <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}`}>
+        <img 
+          className={this.state.displayTrialEnd ? "full-cover" : "hidden"}
+          src={`/image/end_of_trial`}
+          alt="Stop! The Trial is Over!"
+        />
+        <Link to={`/session/${this.state.sessionPin}/${this.state.currentTrial}/${this.state.wordList}/${this.state.testType}/${this.state.showVR}`}>
           <div className="hidden" ref={this.sessionChanger}>Fish Taco</div>
         </Link>
       </div>

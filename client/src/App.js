@@ -16,7 +16,7 @@ function App() {
                 <Route exact path="/" component={JoinSession}></Route>
                 <Route path="/preparation/:sessionPin" component={Preparation}></Route>
                 <Route 
-                    path="/session/:sessionPin/:currentTrial/:wordList"
+                    path="/session/:sessionPin/:currentTrial/:wordList/:testType/:showVR"
                     component={Session}
                 ></Route>
             </Switch>
