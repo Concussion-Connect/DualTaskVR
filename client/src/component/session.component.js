@@ -32,6 +32,7 @@ export default class Player extends Component {
     this.sessionInfo = getSessionInfo(this.state.testType, this.state.wordList, this.state.showVR);
     this.videoName = this.sessionInfo[this.state.currentTrial].videoName;
     this.sessionChanger = React.createRef();
+    this.videoPlayer = React.createRef();
     this.sessionHasUpdated = this.sessionHasUpdated.bind(this);
   }
     
@@ -41,13 +42,17 @@ export default class Player extends Component {
         console.log("Current data: ", doc.data());
         this.sessionHasUpdated(doc.data());
     });
+    this.videoPlayer.play();
   }
 
   sessionHasUpdated(docData) {
     if (docData) {
       let currentTrialUpdated = docData.currentTrial != this.state.currentTrial;
       if (currentTrialUpdated) {
-        this.setState({currentTrial: docData.currentTrial})
+        this.setState({
+          currentTrial: docData.currentTrial,
+          testType: docData.testType
+        })
         this.sessionChanger.current.click();
         window.location.reload();
       }
@@ -95,7 +100,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="App full-cover">
-        <video className="full-cover" onEnded={() => this.onVideoEnd()} controls autoPlay>
+        <video ref={this.videoPlayer} className="full-cover" onEnded={() => this.onVideoEnd()} controls autoPlay>
           <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
         {/* <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
