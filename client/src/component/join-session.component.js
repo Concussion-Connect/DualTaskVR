@@ -8,7 +8,8 @@ export default class JoinSession extends Component {
   constructor() {
     super();
     this.state = {
-        sessionPin: ""
+        sessionPin: "",
+        displayError: false
     };
     this.submitSessionPin = React.createRef();
     this.validateSession = this.validateSession.bind(this);
@@ -33,6 +34,7 @@ export default class JoinSession extends Component {
         this.props.history.push(`/preparation/${this.state.sessionPin}`);
         // this.submitSessionPin.current.click();
       } else {
+        this.setState({displayError: true});
         console.log("No such document!");
       }
     })
@@ -43,7 +45,7 @@ export default class JoinSession extends Component {
       <div className="App App-header">
         <div className="container">
           <h1>Dual Task Trainer</h1>
-          <div className="alert alert-danger" role="alert">
+          <div className={this.state.displayError ? "alert alert-danger" : "hidden"} role="alert">
             There is not an active session with that session pin.
           </div>
           <input 

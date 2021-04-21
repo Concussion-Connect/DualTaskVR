@@ -1,5 +1,6 @@
 const rootName = "trial";
 const vrRootName = "trial_vr";
+const wordListSuffix = "_wl";
 
 const session_info = {
     "dual": [
@@ -83,11 +84,15 @@ const session_info = {
     ]
 };
 
-function getSessionInfo(testType = "dual", showVR = false) {
+function getSessionInfo(testType, wordList, showVR = false) {
     let chosenTypeInfo = session_info[testType];
     let videoRoot = showVR ? vrRootName : rootName;
     for (let i = 0; i < chosenTypeInfo.length; i++) {
-        chosenTypeInfo[i].videoName = videoRoot + i;
+        if (chosenTypeInfo[i].showWordList) {
+            chosenTypeInfo[i].videoName = videoRoot + i + wordListSuffix + wordList;
+        } else {
+            chosenTypeInfo[i].videoName = videoRoot + i;
+        }
     }
     return chosenTypeInfo;
 }
