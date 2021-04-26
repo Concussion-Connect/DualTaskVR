@@ -52,8 +52,9 @@ export default class Player extends Component {
           currentTrial: docData.currentTrial,
           testType: docData.testType
         })
-        this.sessionChanger.current.click();
+        this.videoName = this.sessionInfo[this.state.currentTrial].videoName;
         this.videoPlayer.current.load()
+        this.sessionChanger.current.click();
         // window.location.reload();
       }
     } else {
