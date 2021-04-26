@@ -53,7 +53,8 @@ export default class Player extends Component {
           testType: docData.testType
         })
         this.sessionChanger.current.click();
-        window.location.reload();
+        this.videoPlayer.current.load()
+        // window.location.reload();
       }
     } else {
       window.location.replace('/');
@@ -99,7 +100,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="App full-cover">
-        <video className="full-cover" onEnded={() => this.onVideoEnd()} muted autoPlay>
+        <video ref={this.videoPlayer} className="full-cover" onEnded={() => this.onVideoEnd()} controls muted autoPlay>
           <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
         {/* <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
