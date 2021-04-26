@@ -12,7 +12,7 @@ const session_info = {
         {
             id: 1,
             videoName: "",
-            showWordList: true
+            showWordList: false
 
         },
         {
@@ -50,6 +50,11 @@ const session_info = {
         },
         {
             id: 3,
+            videoName: "",
+            showWordList: false
+        },
+        {
+            id: 4,
             videoName: "",
             showWordList: false
         },
