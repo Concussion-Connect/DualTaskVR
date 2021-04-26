@@ -99,7 +99,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="App full-cover">
-        <video className="full-cover" onEnded={() => this.onVideoEnd()} muted autoPlay>
+        <video className="full-cover" onEnded={() => this.onVideoEnd()} controls muted autoPlay>
           <source src={`/video/${this.state.testType}/${this.videoName}`} type="video/mp4"></source>
         </video>
         {/* <div className={this.state.displayWordList ? "word-list-display" : "hidden"}>
