@@ -12,7 +12,7 @@ const session_info = {
         {
             id: 1,
             videoName: "",
-            showWordList: false
+            showWordList: true
 
         },
         {

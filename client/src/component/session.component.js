@@ -47,11 +47,13 @@ export default class Player extends Component {
   sessionHasUpdated(docData) {
     if (docData) {
       let currentTrialUpdated = docData.currentTrial != this.state.currentTrial;
-      if (currentTrialUpdated) {
+      let currentTestTypeUpdated = docData.testType != this.state.testType;
+      if (currentTrialUpdated || currentTestTypeUpdated) {
         this.setState({
           currentTrial: docData.currentTrial,
           testType: docData.testType
         })
+        this.sessionInfo = getSessionInfo(this.state.testType, this.state.wordList, this.state.showVR);
         this.videoName = this.sessionInfo[this.state.currentTrial].videoName;
         this.videoPlayer.current.load()
         this.sessionChanger.current.click();
