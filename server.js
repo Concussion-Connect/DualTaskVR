@@ -70,10 +70,6 @@ app.get('/image/:imageName', (req, res) => {
   ps.pipe(res)
 })
 
-const sessionRouter = require('./routes/session');
-
-app.use('/session', sessionRouter);
-
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 })
