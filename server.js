@@ -56,18 +56,18 @@ app.get('/video/:videoDirectory/:videoName', (req, res) => {
 // Image Retrieval
 app.get('/image/:imageName', (req, res) => {
   const path_to = `assets/images/${req.params.imageName}.png`;
-  const r = fs.createReadStream(path_to) // or any other way to get a readable stream
-  const ps = new stream.PassThrough() // <---- this makes a trick with stream error handling
+  const r = fs.createReadStream(path_to)
+  const ps = new stream.PassThrough()
   stream.pipeline(
    r,
-   ps, // <---- this makes a trick with stream error handling
+   ps,
    (err) => {
     if (err) {
-      console.log(err) // No such file or any other kind of error
+      console.log(err)
       return res.sendStatus(400); 
     }
   })
-  ps.pipe(res) // <---- this makes a trick with stream error handling
+  ps.pipe(res)
 })
 
 const sessionRouter = require('./routes/session');
